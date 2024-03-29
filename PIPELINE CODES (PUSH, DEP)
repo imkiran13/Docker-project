@@ -42,7 +42,7 @@ pipeline {
         }
         stage('stack') {
             steps {
-                sh 'docker stack deploy -c docker-compose.yml courses'
+                sh 'docker stack deploy -c docker-compose.yml paytm'
             }
         }
     }
