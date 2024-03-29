@@ -1,25 +1,25 @@
 version: '3.8'
 services:
   movies:
-    image: imkiran13/paytmmovies:latest
+    image: imkiran13/paymovies:latest
     ports:
       - "81:80"
     deploy:
       replicas: 3
   train:
-    image: imkiran13/paytmtrain:latest
+    image: imkiran13/paytrain:latest
     ports:
       - "82:80"
     deploy:
       replicas: 3
   dth:
-    image: imkiran13/paytmdth:latest
+    image: imkiran13/paydth:latest
     ports:
       - "83:80"
     deploy:
       replicas: 3
   recharge:
-    image: imkiran13/paytmrecharge:latest
+    image: imkiran13/payrecharge:latest
     ports:
       - "84:80"
     deploy:
