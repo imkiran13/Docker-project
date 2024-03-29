@@ -1,0 +1,49 @@
+PUSHING:
+
+pipeline {
+    agent any 
+    
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/imkiran13/Docker-project.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'docker build -t $img .'
+            }
+        }
+        stage('tag') {
+            steps {
+                sh 'docker tag $img $repo'
+            }
+        }
+        stage('push') {
+            steps {
+                sh 'docker login -u $username -p $password'
+                sh 'docker push $repo'
+            }
+        }
+    }
+}
+
+
+DEPLOYMENT:
+
+pipeline {
+    agent any
+
+    stages {
+        stage('check') {
+            steps {
+                  git 'https://github.com/imkiran13/Docker-project.git'
+            }
+        }
+        stage('stack') {
+            steps {
+                sh 'docker stack deploy -c docker-compose.yml courses'
+            }
+        }
+    }
+}
