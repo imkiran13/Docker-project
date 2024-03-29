@@ -1,56 +1,54 @@
-#DOCKER PROJECT:
+# DOCKER PROJECT
 
+## Docker Installation and Setup
 
+```bash
 yum install docker -y
 systemctl start docker
 systemctl status docker
-
+Dockerfile
+Dockerfile
+Copy code
 FROM ubuntu
 RUN apt-get update -y
 RUN apt-get install apache2 -y
 COPY index.html /var/www/html/
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
-
-
-
-DOCKER FILE	: To create image by automation.
-DOCKER COMPOSE	: To create multiple containers on single server.
-DOCKER SWARM	: To create multiple containers on Multiple server.
-DOCKE STACK	: Docker swarm + Docker compose
-
-#1. CREATE 3 SERVERS AND INSTALL DOCKER ON ALL OF THEM & CREATE CLUSTER OF IT
-
+Docker Concepts
+Docker File: To create image by automation.
+Docker Compose: To create multiple containers on single server.
+Docker Swarm: To create multiple containers on Multiple server.
+Docker Stack: Docker swarm + Docker compose
+Cluster Setup
+bash
+Copy code
 yum install docker -y
 systemctl start docker
 systemctl status docker
 docker swarm init --advertise-addr 172.31.85.110
 docker node ls
-
-
-#2. INSTALLING JENKINS (MASTER)
-
+Jenkins Installation (Master)
+bash
+Copy code
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
 amazon-linux-extras install java-openjdk11 -y 
 yum install git maven jenkins -y
 systemctl start jenkins.service
 systemctl status jenkins.service
-
-
-3. CREATE CUSTOM IMAGES AND PUSH TO DOCKERHUB WITH TAGS
-
-DOCKER FILE:
+Custom Images and Dockerhub
+Dockerfile
+Dockerfile
+Copy code
 FROM ubuntu
 RUN apt-get update -y
 RUN apt-get install apache2 -y
 COPY index.html /var/www/html/
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
-
-INDEX.HTML:
-
-
-PIPELINE:
-
+Index.html
+Jenkins Pipeline
+groovy
+Copy code
 pipeline {
     agent any 
     
@@ -78,17 +76,15 @@ pipeline {
         }
     }
 }
-
-
-#4. GIVE PERMISSIONS
-
+Permissions
+bash
+Copy code
 chmod 777 /var/run/docker.sock
 systemctl daemon-reload
 systemctl restart docker.service
-
-
-#5. WRITE COMPOSE FILE AND PUSH TO GITHUB
-
+Docker Compose File
+yaml
+Copy code
 version: '3'
 services:
   devops:
