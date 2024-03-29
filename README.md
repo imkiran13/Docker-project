@@ -1,14 +1,9 @@
-# DOCKER PROJECT
-
-## Docker Installation and Setup
+DOCKER PROJECT:
 
 
 yum install docker -y
 systemctl start docker
 systemctl status docker
-
-
-##Dockerfile
 
 FROM ubuntu
 RUN apt-get update -y
@@ -16,13 +11,14 @@ RUN apt-get install apache2 -y
 COPY index.html /var/www/html/
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
 
-##Docker Concepts
-Docker File: To create image by automation.
-Docker Compose: To create multiple containers on single server.
-Docker Swarm: To create multiple containers on Multiple server.
-Docker Stack: Docker swarm + Docker compose
 
-##Cluster Setup
+
+DOCKER FILE	: To create image by automation.
+DOCKER COMPOSE	: To create multiple containers on single server.
+DOCKER SWARM	: To create multiple containers on Multiple server.
+DOCKE STACK	: Docker swarm + Docker compose
+
+1. CREATE 3 SERVERS AND INSTALL DOCKER ON ALL OF THEM & CREATE CLUSTER OF IT
 
 yum install docker -y
 systemctl start docker
@@ -30,7 +26,8 @@ systemctl status docker
 docker swarm init --advertise-addr 172.31.85.110
 docker node ls
 
-##Jenkins Installation (Master)
+
+2. INSTALLING JENKINS (MASTER)
 
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
@@ -40,18 +37,19 @@ systemctl start jenkins.service
 systemctl status jenkins.service
 
 
-##Dockerfile
+3. CREATE CUSTOM IMAGES AND PUSH TO DOCKERHUB WITH TAGS
 
-
+DOCKER FILE:
 FROM ubuntu
 RUN apt-get update -y
 RUN apt-get install apache2 -y
 COPY index.html /var/www/html/
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
 
-Index.html
+INDEX.HTML:
 
-##Jenkins Pipeline
+
+PIPELINE:
 
 pipeline {
     agent any 
@@ -80,15 +78,17 @@ pipeline {
         }
     }
 }
-##Permissions
+
+
+4. GIVE PERMISSIONS
 
 chmod 777 /var/run/docker.sock
 systemctl daemon-reload
 systemctl restart docker.service
 
-##Docker Compose File
-yaml
-Copy code
+
+5. WRITE COMPOSE FILE AND PUSH TO GITHUB
+
 version: '3'
 services:
   devops:
