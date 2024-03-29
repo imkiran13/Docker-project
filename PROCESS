@@ -62,7 +62,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-              git 'https://github.com/imkiran13/Docker-project.git'
+                     git branch: 'main', url: 'https://github.com/imkiran13/Docker-project.git'
             }
         }
         stage('build') {
